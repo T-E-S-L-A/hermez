@@ -32,8 +32,15 @@ $message_id = $update["message"]["message_id"];
 
 
     function sendMessage ($chatId, $message, $botToken){
-        $url = "https://api.telegram.org/bot".$botToken."/sendMessage?chat_id=".$chatId."&text=".$message."&parse_mode=HTML";
-        file_get_contents($url);      
+
+        $urlMsg = "https://api.telegram.org/bot{$botToken}/sendMessage";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $urlMsg);curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "chat_id={$chatId}&parse_mode=HTML&text=$message");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $server_output = curl_exec($ch);
+        curl_close($ch);    
       }
 
 ?>
