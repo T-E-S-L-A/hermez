@@ -23,11 +23,14 @@ if($chatId == "1545891683" || $chatId == "1032995082"){
     if((strpos($message, ".semana") === 0)){
         $mensaje = str_replace(".semana ", "", $message);
         echo "MENSAJE: ".$mensaje;
+        echo "<br>";
         $user = explode(" ", $mensaje);
         $user_id = $user[0];
         $user_profile = $user[1];
         echo "ID: ".$user_id;
+        echo "<br>";
         echo "PERFIL: ".$user_profile;
+        echo "<br>";
         $inicio = date("Y-m-d");
         $final = date("Y-m-d",strtotime($inicio."+ 1 week"));
 
