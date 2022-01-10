@@ -13,13 +13,13 @@ $message = $update["message"]["text"];
 $message_id = $update["message"]["message_id"];
 
 if((strpos($message, ".aaa") === 0)){
-  echo "USUARIO AGREGADO";  
+  sendMessage($chatId, "USUARIO AGREGADO");  
 }
 
 
-//function sendMessage ($chatId, $message){
-//  $url = "https://api.telegram.org/bot".$botToken."/sendMessage?chat_id=".$chatId."&text=".$message."&parse_mode=HTML";
-//  file_get_contents($url);      
-//}
+function sendMessage ($chatId, $message){
+  $url = "https://api.telegram.org/bot".$botToken."/sendMessage?chat_id=".$chatId."&text=".$message."&parse_mode=HTML";
+  file_get_contents($url);      
+}
 
 ?>
