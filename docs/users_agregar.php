@@ -34,7 +34,7 @@ if($chatId == "1545891683" || $chatId == "1032995082"){
         $inicio = date("Y-m-d");
         $final = date("Y-m-d",strtotime($inicio."+ 1 week"));
 
-        $fields = array('id' => $user_id, 'nombre' => urlencode($user_profile), 'inicio' => $inicio, 'final' => $final);
+        $fields = array('id' => $user_id, 'usuario' => urlencode($user_profile), 'inicio' => $inicio, 'final' => $final);
         $fields_string = http_build_query($fields);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, "https://hermez-rb.000webhostapp.com/users_agregar_server.php");
