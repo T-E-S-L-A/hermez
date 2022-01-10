@@ -19,7 +19,28 @@ $message_id = $update["message"]["message_id"];
 
     //////////=========[SEMANA]=========//////////
     if((strpos($message, ".semana") === 0)){
-        sendMessage($chatId, "USUARIO AGREGADO", $botToken);  
+        $mensaje = substr($message, -8, 0)
+        $user = explode(" ", $mensaje);
+        $user_id = $user[0];
+        $user_profile = $user[1];
+        $inicio = date("Y-m-d");
+        $final = date("Y-m-d",strtotime($inicio."+ 1 week");
+
+        $fields = array('id' => $user_id, 'nombre' => urlencode($user_profile), 'inicio' => urlencode($inicio), 'final' => urlencode($final));
+        $fields_string = http_build_query($fields);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://hermez-rb.000webhostapp.com/users_agregar_server.php");
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string );
+        $data = curl_exec($ch);
+        curl_close($ch);
+
+        if($data == "OK"){
+            sendMessage($chatId, "USUARIO AGREGADO"."\n\n"."Acceso: 1 semana", $botToken);
+        }
+        else{
+            sendMessage($chatId, "ERROR: No fue posible hacer el registro", $botToken);
+        }
     }
 
 
