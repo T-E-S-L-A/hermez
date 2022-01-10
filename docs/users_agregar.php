@@ -5,7 +5,7 @@
 $botToken = "5005726938:AAFJ7NOJLAgihy17hW_qxwGPgZFw-2HfB2c";
 $update = file_get_contents('php://input');
 $update = json_decode($update, TRUE);
-$print = print_r($update);
+//$print = print_r($update);
 $chatId = $update["message"]["chat"]["id"];
 $gId = $update["message"]["from"]["id"];
 $userId = $update["message"]["from"]["id"];
@@ -22,9 +22,12 @@ if($chatId == "1545891683" || $chatId == "1032995082"){
     //////////=========[SEMANA]=========//////////
     if((strpos($message, ".semana") === 0)){
         $mensaje = substr($message, -8, 0);
+        echo "MENSAJE: ".$message;
         $user = explode(" ", $mensaje);
         $user_id = $user[0];
         $user_profile = $user[1];
+        echo "ID: ".$user_id;
+        echo "PERFIL: ".$user_profile;
         $inicio = date("Y-m-d");
         $final = date("Y-m-d",strtotime($inicio."+ 1 week"));
 
