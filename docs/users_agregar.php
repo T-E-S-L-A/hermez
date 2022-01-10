@@ -21,7 +21,7 @@ if($chatId == "1545891683" || $chatId == "1032995082"){
 
     //////////=========[SEMANA]=========//////////
     if((strpos($message, ".semana") === 0)){
-        $mensaje = substr($message, -8, 0);
+        $mensaje = str_replace(".semana ", "", $message);
         echo "MENSAJE: ".$mensaje;
         $user = explode(" ", $mensaje);
         $user_id = $user[0];
