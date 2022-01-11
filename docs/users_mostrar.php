@@ -2,16 +2,17 @@
 
 $nuevo = "👤USUARIO EXPIRADO👤"."\n\n";
 $id = "➤<b>ID Telegram:</b> ".$_POST['id']."\n";
-$nombre = "➤<b>PERFIL:</b> ".$_POST['nombre']."\n";
+$nombre = "➤<b>PERFIL:</b> ".urldecode($_POST['usuario'])."\n";
 $inicio = "➤<b>Inicio:</b> ".$_POST['inicio']."\n";
 $final = "➤<b>Final:</b> ".$_POST['final'];
+$propietario = $_POST['propietario'];
 
 
 $mensaje = $nuevo.$id.$nombre.$inicio.$final;
 
 if(isset($nombre)){
     $token = "5005726938:AAFJ7NOJLAgihy17hW_qxwGPgZFw-2HfB2c";
-    $id = "1545891683";
+    $id = $propietario;
     $urlMsg = "https://api.telegram.org/bot{$token}/sendMessage";
     $msg = $mensaje;
 
