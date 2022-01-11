@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('America/Mexico_City');
+
 ///https://api.telegram.org/bot5005726938:AAFJ7NOJLAgihy17hW_qxwGPgZFw-2HfB2c/setwebhook?url=https://hermez.herokuapp.com/users_mostrar.php
 
 $botToken = "5005726938:AAFJ7NOJLAgihy17hW_qxwGPgZFw-2HfB2c";
@@ -95,7 +97,7 @@ if($chatId == "1545891683" || $chatId == "1032995082"){
         }
     }
 
-    elseif((strpos($message, ".todo") === 0)){
+    elseif((strpos($message, "/todo") === 0)){
         $fields = array('action' => "todo");
         $fields_string = http_build_query($fields);
         $ch = curl_init();
