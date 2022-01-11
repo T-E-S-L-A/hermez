@@ -20,17 +20,11 @@ $message_id = $update["message"]["message_id"];
 if($chatId == "1545891683" || $chatId == "1032995082"){
 
     //////////=========[SEMANA]=========//////////
-    if((strpos($message, ".semana") === 0)){
-        $mensaje = str_replace(".semana ", "", $message);
-        echo "MENSAJE: ".$mensaje;
-        echo "<br>";
+    if((strpos($message, "/semana") === 0)){
+        $mensaje = str_replace("/semana ", "", $message);
         $user = explode(" ", $mensaje);
         $user_id = $user[0];
         $user_profile = $user[1];
-        echo "ID: ".$user_id;
-        echo "<br>";
-        echo "PERFIL: ".$user_profile;
-        echo "<br>";
         $inicio = date("Y-m-d");
         $final = date("Y-m-d",strtotime($inicio."+ 1 week"));
 
@@ -45,6 +39,56 @@ if($chatId == "1545891683" || $chatId == "1032995082"){
 
         if($data == "OK"){
             sendMessage($chatId, "USUARIO AGREGADO"."\n\n"."Acceso: 1 semana", $botToken);
+        }
+        else{
+            sendMessage($chatId, "ERROR: No fue posible hacer el registro", $botToken);
+        }
+    }
+
+    elseif((strpos($message, "/mes") === 0)){
+        $mensaje = str_replace("/mes ", "", $message);
+        $user = explode(" ", $mensaje);
+        $user_id = $user[0];
+        $user_profile = $user[1];
+        $inicio = date("Y-m-d");
+        $final = date("Y-m-d",strtotime($inicio."+ 1 month"));
+
+        $fields = array('id' => $user_id, 'usuario' => urlencode($user_profile), 'inicio' => $inicio, 'final' => $final);
+        $fields_string = http_build_query($fields);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://hermez-rb.000webhostapp.com/users_agregar_server.php");
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string );
+        $data = curl_exec($ch);
+        curl_close($ch);
+
+        if($data == "OK"){
+            sendMessage($chatId, "USUARIO AGREGADO"."\n\n"."Acceso: 1 Mes", $botToken);
+        }
+        else{
+            sendMessage($chatId, "ERROR: No fue posible hacer el registro", $botToken);
+        }
+    }
+
+    elseif((strpos($message, "/ano") === 0)){
+        $mensaje = str_replace("/ano ", "", $message);
+        $user = explode(" ", $mensaje);
+        $user_id = $user[0];
+        $user_profile = $user[1];
+        $inicio = date("Y-m-d");
+        $final = date("Y-m-d",strtotime($inicio."+ 1 year"));
+
+        $fields = array('id' => $user_id, 'usuario' => urlencode($user_profile), 'inicio' => $inicio, 'final' => $final);
+        $fields_string = http_build_query($fields);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://hermez-rb.000webhostapp.com/users_agregar_server.php");
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string );
+        $data = curl_exec($ch);
+        curl_close($ch);
+
+        if($data == "OK"){
+            sendMessage($chatId, "USUARIO AGREGADO"."\n\n"."Acceso: 1 Año", $botToken);
         }
         else{
             sendMessage($chatId, "ERROR: No fue posible hacer el registro", $botToken);
